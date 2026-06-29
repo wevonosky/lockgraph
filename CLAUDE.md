@@ -45,3 +45,10 @@ Run `scripts/check.sh` before considering a logical block of work done. Individu
 - `uv run ruff format .` then `uv run ruff check`
 - `uv run pyrefly check`
 - `uv run pytest`
+
+## Workflow
+
+- `main` is branch-protected. **Never push to `main` directly** — branch, open a PR, merge via squash. (Admin bypass exists; don't use it.)
+- One PR per issue. PR titles use the issue's conventional-commit form (`feat(core): ...`); the squash commit takes the PR title + body, so write them deliberately. Reference the issue with `Closes #N`.
+- `scripts/check.sh` must be green before a PR is ready, and every feature ships with tests (98% coverage gate).
+- Dependencies are managed with `uv add` / `uv remove`. A 7-day supply-chain cooldown (`[tool.uv] exclude-newer`) means a just-published release won't resolve until it has aged — pin floors accordingly, don't fight it.

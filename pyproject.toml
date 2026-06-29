@@ -1,0 +1,76 @@
+[project]
+name = "lockgraph"
+version = "0.1.0"
+description = "Inspect a uv workspace's internal dependency graph and generate/verify Docker COPY layers from uv.lock."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+requires-python = ">=3.11"
+authors = [{ name = "Will Evonosky" }]
+keywords = ["uv", "workspace", "monorepo", "docker", "dependency-graph", "uv-lock"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Build Tools",
+    "Topic :: Utilities",
+]
+dependencies = ["click>=8.4"]
+
+[project.scripts]
+lockgraph = "lockgraph.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/wevonosky/lockgraph"
+Repository = "https://github.com/wevonosky/lockgraph"
+Issues = "https://github.com/wevonosky/lockgraph/issues"
+
+[build-system]
+requires = ["uv_build>=0.11.25,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "lockgraph"
+
+[dependency-groups]
+dev = [
+    "pyrefly>=1.1.1",
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "ruff>=0.15",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "."]
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = ["D", "COM812", "TC001", "TC002", "TC003"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["lockgraph"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S101", "ARG001", "ARG002", "PLR2004", "SLF001", "INP001"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-q --cov=lockgraph --cov-report=term-missing --cov-fail-under=98 --no-cov-on-fail"
+
+[tool.pyrefly]
+search-path = ["src", "."]
+project-excludes = ["**/.venv/**", "**/__pycache__", "**/.[!/.]*/**"]
+min-severity = "warn"
+
+[tool.pyrefly.errors]
+unused-ignore = true
+deprecated = false

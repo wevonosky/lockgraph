@@ -1,0 +1,15 @@
+version = 1
+
+[[package]]
+name = "x"
+version = "0.1.0"
+source = { editable = "x" }
+dependencies = [{ name = "y" }]
+
+[package.dev-dependencies]
+dev = [{ name = "y" }]
+
+[[package]]
+name = "y"
+version = "0.1.0"
+source = { editable = "y" }

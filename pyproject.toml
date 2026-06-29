@@ -49,6 +49,8 @@ dev = [
 line-length = 100
 target-version = "py311"
 src = ["src", "."]
+# The toy workspace under tests/fixtures is frozen test input, not our code.
+extend-exclude = ["tests/fixtures"]
 
 [tool.ruff.lint]
 select = ["ALL"]
@@ -71,7 +73,7 @@ addopts = "-q --cov=lockgraph --cov-report=term-missing --cov-fail-under=98 --no
 
 [tool.pyrefly]
 search-path = ["src", "."]
-project-excludes = ["**/.venv/**", "**/__pycache__", "**/.[!/.]*/**"]
+project-excludes = ["**/.venv/**", "**/__pycache__", "**/.[!/.]*/**", "tests/fixtures/**"]
 min-severity = "warn"
 
 [tool.pyrefly.errors]

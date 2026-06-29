@@ -1,0 +1,12 @@
+version = 1
+
+[[package]]
+name = "Shared_Lib"
+version = "0.1.0"
+source = { editable = "shared" }
+
+[[package]]
+name = "consumer"
+version = "0.1.0"
+source = { editable = "consumer" }
+dependencies = [{ name = "shared.lib" }]

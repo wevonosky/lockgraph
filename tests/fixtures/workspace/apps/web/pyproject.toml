@@ -1,0 +1,21 @@
+[project]
+name = "web"
+dynamic = ["version"]
+requires-python = ">=3.11"
+readme = "README.md"
+license-files = ["LICENSE"]
+dependencies = ["liba", "libb"]
+
+[tool.uv.sources]
+liba = { workspace = true }
+libb = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/web/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/web"]

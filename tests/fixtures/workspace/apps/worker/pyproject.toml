@@ -1,0 +1,21 @@
+[project]
+name = "worker"
+version = "0.1.0"
+requires-python = ">=3.11"
+readme = "README.md"
+dependencies = ["core"]
+
+[project.optional-dependencies]
+cli = ["libb"]
+
+[dependency-groups]
+dev = ["liba"]
+
+[tool.uv.sources]
+core = { workspace = true }
+liba = { workspace = true }
+libb = { workspace = true }
+
+[build-system]
+requires = ["uv_build>=0.10,<0.12"]
+build-backend = "uv_build"
